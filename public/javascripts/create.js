@@ -7,9 +7,34 @@ $(function () {
       $('#building-name').remove();
     else if ($(this).val() === 'Apartment Building') {
       if ($('#building-name').length == 0) {
-        $('#beds-paragraph').before('<p id=\'building-name\'>Building Name:</p>');
-        $('#building-name').append('<input type=\'text\' name=\'buildingName\'>');
+        $('#beds-paragraph').before('<div id=\'building-name\' class=\'form-group\'>Building Name:</div>');
+        $('#building-name').append('<input type=\'text\' name=\'buildingName\' class=\'form-control\'>');
       }
+    }
+  });
+  $('#zip').change(function(e) {
+    var zipCode = $(this).val().trim();
+    var isNum;
+    try {
+      parseInt(zipCode);
+      isNum = true;
+    } catch (err) {
+      isNum = false;
+    }
+    console.log(isNum);
+    console.log(zipCode.length);
+    if (zipCode.length !== 5 || !isNum) {
+      $('#zip-paragraph').removeClass('has-success');
+      $('#zip-paragraph').addClass('has-error');
+    } else {
+      $('#zip-paragraph').removeClass('has-error');
+      $('#zip-paragraph').addClass('has-success');
+    }
+  });
+  $('#submission').on('click', function(e) {
+    var zipError = $('#zip-paragraph').hasClass('has-error');
+    if (zipError) {
+      e.preventDefault();
     }
   });
 });

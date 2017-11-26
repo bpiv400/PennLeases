@@ -12,8 +12,8 @@ router.post('/', function(req, res, next) {
   var term = req.body.term;
   var streetNumber = req.body.streetNumber;
   var unit = req.body.unit;
-  var street = req.body.street;
-  var zip = req.body.zip;
+  var street = req.body.street.trim();
+  var zip = req.body.zip.trim();
   var housingType = req.body.housingType;
   var buildingName = req.body.buildingName;
   var beds = req.body.beds;
@@ -41,13 +41,13 @@ router.post('/', function(req, res, next) {
     listingData.size = size;
   }
   if (description) {
-    listingData.description = description;
+    listingData.description = description.trim();
   }
   if (buildingName) {
-    listingData.buildingName = buildingName;
+    listingData.buildingName = buildingName.trim();
   }
   if (unit) {
-    listingData.address.unit = unit;
+    listingData.address.unit = unit.trim();
   }
   listingDb.addListing(listingData, function(err) {
     if(err) {

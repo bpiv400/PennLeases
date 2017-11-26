@@ -15,74 +15,80 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/create.js"></script>
     <h1>Submit a Sublease Listing</h1>
-    <form method="post">
-      <fieldset id='availability-set'><legend>Availability</legend>
+    <form method="post" class='formal-vertical'>
+      <fieldset id='availability-set' class='form-group'><legend>Availability</legend>
         <%
           for (var i = 0; i < possTerms.length; i++) {
             %>
-            <p>
-              <input type='checkbox' name='term' id="<%=possTerms[i]%>"
-              value="<%=possTerms[i]%>">
-              <label for="<%=possTerms[i]%>"><%=possTerms[i]%></label>
-            </p>
+            <div class='form-check'>
+                <input type='checkbox' name='term' id="<%=possTerms[i]%>"
+                value="<%=possTerms[i]%>" class='form-check-input'>
+                <label class='form-check-label' for="<%=possTerms[i]%>"><%=possTerms[i]%></label>
+              </div>
+            </div>
             <%
           }
         %>
+        </div>
       </fieldset>
 
       <fieldset><legend>Address Information</legend>
-        <p>Street Number
-          <input type='number' name='streetNumber' id='street-number' required>
-        </p>
-        <p>Unit
-          <input type='text' name='unit' id='unit'>
-        </p>
-        <p>Street
-          <input type='text' name='street' id='street' required>
-        </p>
-        <p>Zip Code
-          <input type='text' name='zip' id='zip' required>
-        </p>
+        <div class='form-group'>Street Number
+          <input type='number' name='streetNumber' id='street-number'
+          class='form-control' required>
+        </div>
+        <div class='form-group'>Unit
+          <input type='text' name='unit' id='unit' class='form-control'>
+        </div>
+        <div class='form-group'>Street
+          <input type='text' name='street' id='street' class='form-control' required>
+        </div>
+        <div id='zip-paragraph' class='form-group'>Zip Code
+          <input type='text' name='zip' id='zip' class='form-control' required>
+        </div>
       </fieldset>
 
       <fieldset><legend>Sublease Details</legend>
-        <p id ='property-paragraph'>Type of Property:
-          <select name='housingType' id = 'housing-type-select'>
+        <div id ='property-paragraph'>Type of Property:
+          <select name='housingType' id = 'housing-type-select' class='form-control'>
             <option value='House'>House</option>
             <option value='Apartment Building'>Apartment Building</option>
           </select>
-        </p>
-        <p id='beds-paragraph'>Beds:
-          <input type='number' name='beds' id='beds' min='1' required></p>
-        <p>Baths:
+        </div>
+        <div id='beds-paragraph' class='form-group'>Beds:
+          <input type='number' name='beds' id='beds' min='1' required
+          class='form-control'></div>
+        <div>Baths:
           <input type='number' name='baths' id='baths' required
-          step='0.5' min='0'></p>
-        <p>Occupancy:
+          step='0.5' min='0' class='form-control'></div>
+        <div>Occupancy:
           <input type='number' name='occupancy' id='occupancy' required
-          min='1'></p>
-        <p>Size (optional):
-          <input type='number' name='size' id='size' step='0.01' min='0'></p>
-        <fieldset>
-          <p>Furnished:<br>
+          min='1' class='form-control'></div>
+        <div>Size (optional):
+          <input type='number' name='size' id='size' step='0.01' min='0'
+          class='form-control'></div>
+        <fieldset class='form-group'>Furnished:
+          <div class='form-check'>
             <input type='radio'value=0 id='furnish-switch-1' name='furnished'
-            selected>
-            <label for='furnish-switch-1'>No</label>
-          </p>
-          <p>
-            <input type='radio'value=1 id='furnish-switch-2' name='furnished'>
-            <label for='furnish-switch-2'>Yes</label>
-          </p>
+            selected class='form-check-input'>
+            <label for='furnish-switch-1' class='form-check-label'>No</label>
+          </div>
+          <div class ='form-check'>
+            <input type='radio'value=1 id='furnish-switch-2' name='furnished'
+            class='form-check-input'>
+            <label for='furnish-switch-2' class='form-check-label'>Yes</label>
+          </div>
         </fieldset>
-        <p>Price per Month:
+        <div>Price per Month:
           <input type='number' name='price' placeholder='800' required
-          step='0.01' min='0'>
-        </p>
-        <p>Description:<br>
-          <textarea name="description"
+          step='0.01' min='0' class='form-control'>
+        </div>
+        <div>Description:<br>
+          <textarea name="description" class='form-control'
           id='description'>
           </textarea>
-        </p>
+        </div>
       </fieldset>
-      <p><input type="submit"></p>
+      <div><input type="submit", id='submission'></div>
     </body>
   </html>
