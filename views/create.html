@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+
+    <link rel='stylesheet' type='text/css'
+     href='/stylesheets/bootstrap.min.css'>
+    <link rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'>
+    <!-- link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"!-->
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/create.js"></script>
+    <h1>Submit a Sublease Listing</h1>
+    <form method="post">
+      <fieldset id='availability-set'><legend>Availability</legend>
+        <%
+          for (var i = 0; i < possTerms.length; i++) {
+            %>
+            <p>
+              <input type='checkbox' name='term' id="<%=possTerms[i]%>"
+              value="<%=possTerms[i]%>">
+              <label for="<%=possTerms[i]%>"><%=possTerms[i]%></label>
+            </p>
+            <%
+          }
+        %>
+      </fieldset>
+
+      <fieldset><legend>Address Information</legend>
+        <p>Street Number
+          <input type='number' name='streetNumber' id='street-number' required>
+        </p>
+        <p>Unit
+          <input type='text' name='unit' id='unit'>
+        </p>
+        <p>Street
+          <input type='text' name='street' id='street' required>
+        </p>
+        <p>Zip Code
+          <input type='text' name='zip' id='zip' required>
+        </p>
+      </fieldset>
+
+      <fieldset><legend>Sublease Details</legend>
+        <p id ='property-paragraph'>Type of Property:
+          <select name='housingType' id = 'housing-type-select'>
+            <option value='House'>House</option>
+            <option value='Apartment Building'>Apartment Building</option>
+          </select>
+        </p>
+        <p id='beds-paragraph'>Beds:
+          <input type='number' name='beds' id='beds' min='1' required></p>
+        <p>Baths:
+          <input type='number' name='baths' id='baths' required
+          step='0.5' min='0'></p>
+        <p>Occupancy:
+          <input type='number' name='occupancy' id='occupancy' required
+          min='1'></p>
+        <p>Size (optional):
+          <input type='number' name='size' id='size' step='0.01' min='0'></p>
+        <fieldset>
+          <p>Furnished:<br>
+            <input type='radio'value=0 id='furnish-switch-1' name='furnished'
+            selected>
+            <label for='furnish-switch-1'>No</label>
+          </p>
+          <p>
+            <input type='radio'value=1 id='furnish-switch-2' name='furnished'>
+            <label for='furnish-switch-2'>Yes</label>
+          </p>
+        </fieldset>
+        <p>Price per Month:
+          <input type='number' name='price' placeholder='800' required
+          step='0.01' min='0'>
+        </p>
+        <p>Description:<br>
+          <textarea name="description"
+          id='description'>
+          </textarea>
+        </p>
+      </fieldset>
+      <p><input type="submit"></p>
+    </body>
+  </html>
