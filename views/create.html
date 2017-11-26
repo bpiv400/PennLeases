@@ -15,7 +15,7 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/create.js"></script>
     <h1>Submit a Sublease Listing</h1>
-    <form method="post" class='formal-vertical'>
+    <form method="post" class='formal-vertical' enctype="multipart/form-data">
       <fieldset id='availability-set' class='form-group'><legend>Availability</legend>
         <%
           for (var i = 0; i < possTerms.length; i++) {
@@ -89,6 +89,14 @@
           </textarea>
         </div>
       </fieldset>
+      <div class="form-group">
+        <label for='pictures'>Photos</label>
+        <input type='file' class='form-control-file' id='pictures'
+        aria-describedby='image-describe' accept="image/*" multiple
+        name='photo'>
+        <small id='image-describe' class='form-text text-muted'>
+          Upload photos of your property here.
+        </small>
       <div><input type="submit", id='submission'></div>
     </body>
   </html>

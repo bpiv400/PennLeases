@@ -14,16 +14,15 @@ $(function () {
   });
   $('#zip').change(function(e) {
     var zipCode = $(this).val().trim();
-    var isNum;
-    try {
-      parseInt(zipCode);
-      isNum = true;
-    } catch (err) {
-      isNum = false;
+    var num = new Number(zipCode);
+    var int = false;
+    if (num) {
+      int = (num % 1) === 0;
     }
-    console.log(isNum);
+    console.log(num);
     console.log(zipCode.length);
-    if (zipCode.length !== 5 || !isNum) {
+    if (zipCode.length !== 5 || !int ||
+    zipCode.charAt(zipCode.length - 1) === '.') {
       $('#zip-paragraph').removeClass('has-success');
       $('#zip-paragraph').addClass('has-error');
     } else {

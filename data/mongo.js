@@ -57,8 +57,8 @@ var listingSchema = new mongoose.Schema({
         message: 'Value must be multiple of 1/2'
       }, required: true},
   description: {type: String, maxlength: 400},
-  address: {type: mongoose.Schema.Types.ObjectId, ref : 'Address', required : true}
-
+  address: {type: mongoose.Schema.Types.ObjectId, ref : 'Address', required : true},
+  photos: [mongoose.Schema.Types.ObjectId]
 });
 
 var addressSchema = new mongoose.Schema({
@@ -93,6 +93,7 @@ module.exports = {
   Listings: Listings,
   Address: Address,
   mongoose: mongoose,
+  conn: db,
   db: db.collection('Listings'),
   possTerms: possTerms
 };
