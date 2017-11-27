@@ -4,8 +4,8 @@ var conn = require('../data/mongo').conn;
 var mongoose = require('../data/mongo').mongoose;
 var router = express.Router();
 var listingDb = require('../data/listings');
-var multer = require('multer');
-var GridFsStorage = require('multer-gridfs-storage');
+var fileUpload = require('express-fileupload');
+var fs = require('fs');
 
 
 /*var Grid = require('gridfs-stream');
@@ -13,23 +13,25 @@ Grid.mongo = mongoose.mongo;
 
 var gfs = Grid(conn.db);
 */
-var storage = new GridFsStorage({
-    url: 'mongodb://127.0.0.1:27017/penn-leases',
-    filename: function (req, file, cb) {
-       var datetimestamp = Date.now();
-       cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
-    },
-    metadata: function(req, file, cb) {
-      cb(null, { originalname: file.originalname });
-    },
-    root: 'photos' //root name for collection to store files into
-});
+// var storage = new GridFsStorage({
+//     url: 'mongodb://127.0.0.1:27017/penn-leases',
+//     filename: function (req, file, cb) {
+//        var datetimestamp = Date.now();
+//        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+//     },
+//     metadata: function(req, file, cb) {
+//       cb(null, { originalname: file.originalname });
+//     },
+//     root: 'photos' //root name for collection to store files into
+// });
+//
+// var upload = multer({
+//   storage: storage
+// }).array('photo');
+//
+// router.use('/', upload);
 
-var upload = multer({
-  storage: storage
-}).array('photo');
-
-router.use('/', upload);
+router.use('/', fileUpload());
 
 router.get('/', function(req, res, next) {
   res.render('create', {possTerms : termOptions});
@@ -51,7 +53,6 @@ router.post('/', function(req, res, next) {
   var furnished = new Boolean(req.body.furnished);
   var description = req.body.description;
   var files = req.files;
-  console.log(typeof files);
   var listingData = {
     housingType: housingType,
     term: term,
@@ -80,19 +81,28 @@ router.post('/', function(req, res, next) {
   }
   if (files) {
     var photos = new Array();
-    for(var i = 0; i < files.length; i++) {
-      photos.push(files[0].id);
+    for(var i = 0; i < files.photo.length; i++) {
+      var curr = files.photo[i]
+      photos.push({
+        data: curr.data,
+        contentType: curr.mimetype
+      });
     }
     listingData.photos = photos;
   }
 
-  listingDb.addListing(listingData, function(err) {
+  listingDb.addListing(listingData, function (err, listing) {
     if(err) {
       next(err);
     } else {
-      res.send('Listing added successfully!');
+      var id = listing.id.valueOf();
+      res.redirect('/create/success/' + id);
     }
   });
+});
+
+router.get('/success/:id', function(req, res, next) {
+  res.render('success', {id : req.params.id});
 });
 
 module.exports = router;

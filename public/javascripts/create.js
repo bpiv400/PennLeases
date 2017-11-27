@@ -19,8 +19,6 @@ $(function () {
     if (num) {
       int = (num % 1) === 0;
     }
-    console.log(num);
-    console.log(zipCode.length);
     if (zipCode.length !== 5 || !int ||
     zipCode.charAt(zipCode.length - 1) === '.') {
       $('#zip-paragraph').removeClass('has-success');

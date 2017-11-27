@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+
+    <link rel='stylesheet' type='text/css'
+     href='/stylesheets/bootstrap.min.css'>
+    <link rel='stylesheet' href='/stylesheets/bootstrap-theme.min.css'>
+    <!-- link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"!-->
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/success.js"></script>
+    <div class="page-header">
+      <h1>Sublease Posted Successfully!<br><small>What would you like to do next?
+      </small></h1>
+    </div>
+    <div class="btn-group-lg" role="group" aria-label="Navigation Buttons">
+      <button type="button" class="btn btn-default post-button">Post new listing</button>
+      <button type="button" class="btn btn-primary view-button"
+      data-listing-id="<%=id%>">View my listing</button>
+      <button type="button" class="btn btn-default search-button">Search listings</button>
+</div>

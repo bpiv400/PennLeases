@@ -9,6 +9,8 @@ var ejs = require('ejs');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var create = require('./routes/create');
+var view = require('./routes/view');
+var images = require('./routes/images');
 
 var handleError = require('./middlewares/handleError.js');
 
@@ -31,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 // app.use('/users', users);
 app.use('/create', create);
+app.use('/view', view);
+app.use('/images', images);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

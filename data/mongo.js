@@ -58,42 +58,35 @@ var listingSchema = new mongoose.Schema({
       }, required: true},
   description: {type: String, maxlength: 400},
   address: {type: mongoose.Schema.Types.ObjectId, ref : 'Address', required : true},
-  photos: [mongoose.Schema.Types.ObjectId]
+  photos: [{type: mongoose.Schema.Types.ObjectId, ref : 'Photo'}]
+});
+var photoSchema = new mongoose.Schema({
+  data : {type: Buffer, required: true},
+  contentType: {type: String, required: true}
 });
 
 var addressSchema = new mongoose.Schema({
-  streetNumber : {type : String, required: true, trim: true, validate: {
+  streetNumber : {type : Number, required: true, validate: {
     validator: function (value) {
-      try {
-        Integer.parseInt(value);
-        return true;
-      } catch (err) {
-        return false;
-      }
-    }, message : 'street number must be valid integer'
+      return (value % 1) === 0;
+    },
+     message : 'street number must be valid integer'
   }},
   street: {type: String, required: true, trim: true},
   unit: {type: String},
-  zip: {type: String, required: true, minlength: 5, maxlength: 5, validate: {
-    validator: function (value) {
-      try {
-        Integer.parseInt(value);
-        return true;
-      } catch (err) {
-        return false;
-      }
-    }, message : 'street number must be valid integer'
-  }},
+  zip: {type: String, required: true, minlength: 5, trim: true}
 });
 
 var Listings = mongoose.model('Listing', listingSchema);
 var Address = mongoose.model('Address', addressSchema);
+var Photo = mongoose.model('Photo', photoSchema);
 
 module.exports = {
   Listings: Listings,
+  Photo: Photo,
   Address: Address,
   mongoose: mongoose,
   conn: db,
-  db: db.collection('Listings'),
+  listingDb: db.collection('Listings'),
   possTerms: possTerms
 };
