@@ -39,7 +39,7 @@ module.exports = {
         address = listing.address;
         listing = listing.toObject();
         address = address.toObject();
-        callback(error, listing, address);
+        callback(error, listing, address, photos);
       }
     });
   }

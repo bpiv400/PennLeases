@@ -39,41 +39,72 @@
       </h1>
     </div>
     <div class='container'>
-      <div class=".col-md-8">
-        <div class=".col-md-6">
-          <h2 class='my-5 text-left text-lg-left'>Property Information</h3>
-          <h4 class='my-3 text-left'> Availability:
-            <% for (var i = 0; i < listing.term.length; i++) { %>
-              <%=listing.term[i]%>
-              <% if (i !== listing.term.length - 1) {
-                %>, <%
-              }
-            } %>
-          </h4>
-          <h4 class='my-3 text-left'>$<%=listing.price%>/month</h4>
+      <div class='row'>
+        <div class="col-md-8">
+          <div class='row'>
+            <div class="col-md-6">
+              <h2 class='my-5 text-left text-lg-left'>Property Information</h2>
+              <h4 class='my-3 text-left'> Available
+                <% for (var i = 0; i < listing.term.length; i++) { %>
+                  <%=listing.term[i]%>
+                  <% if (i !== listing.term.length - 1) {
+                    %>, <%
+                  }
+                } %>
+              </h4>
+              <h4 class='my-3 text-left'>$<%=listing.price%>/month</h4>
 
-          <h4 class='my-2 text-left'> For <%=listing.occupancy%> resident<%
-          if (listing.occupancy !== 1) { %>s<% } %></h4>
-          <h4 class='my-2 text-left'><%=listing.beds%> Bed<%
-          if (listing.beds !== 1) { %>s<% } %> /
-          <%=listing.baths%> Bath<%
-          if (listing.baths !== 1) { %>s<% } %>
-          </h4>
-          <h4 class='my-2 text-left'><% if(listing.furnished) { %>
-            Furnished<%
-          } else { %>
-            Unfurnished<%
-          } %>
-          <% if (listing.size) { %>
-            <h4 class='my-2 text-left'><%=listing.size%> sq. ft.</h4>
-          <% } %>
+              <h4 class='my-2 text-left'> For <%=listing.occupancy%> resident<%
+              if (listing.occupancy !== 1) { %>s<% } %></h4>
+              <h4 class='my-2 text-left'><%=listing.beds%> Bed<%
+              if (listing.beds !== 1) { %>s<% } %> /
+              <%=listing.baths%> Bath<%
+              if (listing.baths !== 1) { %>s<% } %>
+              </h4>
+              <h4 class='my-2 text-left'><% if(listing.furnished) { %>
+                Furnished<%
+              } else { %>
+                Unfurnished<%
+              } %>
+              <% if (listing.size) { %>
+                <h4 class='my-2 text-left'><%=listing.size%> sq. ft.</h4>
+              <% } %>
+              <h4>Located in <%
+                 if(listing.housingType !== 'House') {
+                   if(listing.buildingName) {
+                     %><%=listing.buildingName%><%
+                  } else {
+                    %>an apartment building<%
+                  }
+                } else {
+                  %>a house<%
+                }%>
+              </h4>
+            </div>
+            <div class="col-md-6">
+              <h2 class='my-5 text-left text-lg-left'>Address</h2>
+              <h4 class='my-2 text-left'><%=address.lineOne%></h4>
+              <% if (address.lineTwo) { %>
+                <h4 class='my-2 text-left'><%=address.lineTwo%></h4><%
+              } %>
+              <h4 class='my-2 text-left'><%=address.lineThree%></h4>
+              <h4 class='my-2 text-left'><%=address.zip%></h4>
+              <h2 class='my-5 text-left text-lg-left'>Contact Owner</h2>
+            </div>
+          </div>
         </div>
-        <div class=".col-md-6">
-
+        <div class='col-md-4'>
+          <h2 class='my-5 text-left text-lg-left'>Google Maps</h2>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe
+              class='embed-responsive-item'
+              src="https://www.google.com/maps/embed/v1/place?key=
+              <%=key%>&q=<%=address.url%>">
+            </iframe>
+          </div>
         </div>
       </div>
-      <div class='.col-md-4'>
-      </div>
+    </div>
     <div class="container">
 
       <h1 class="my-4 text-center text-lg-left">Image Gallery</h1>

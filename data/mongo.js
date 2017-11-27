@@ -73,7 +73,9 @@ var addressSchema = new mongoose.Schema({
      message : 'street number must be valid integer'
   }},
   street: {type: String, required: true, trim: true},
-  unit: {type: String},
+  unit: {type: String, trim: true},
+  city: {type: String, required: true, trim: true},
+  state: {type: String, required: true},
   zip: {type: String, required: true, minlength: 5, trim: true}
 });
 

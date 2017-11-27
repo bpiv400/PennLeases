@@ -53,6 +53,8 @@ router.post('/', function(req, res, next) {
   var furnished = new Boolean(req.body.furnished);
   var description = req.body.description;
   var files = req.files;
+  var state = req.body.state;
+  var city = req.body.city;
   var listingData = {
     housingType: housingType,
     term: term,
@@ -64,6 +66,8 @@ router.post('/', function(req, res, next) {
     address: {
       streetNumber: streetNumber,
       street: street,
+      city: city,
+      state: state,
       zip: zip,
     },
   };

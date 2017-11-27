@@ -11,8 +11,6 @@ router.get('/', function(req, res, next) {
       if (err) {
         next(err);
       }
-      console.log(photo.contentType);
-      console.log(photo.data);
       res.contentType(photo.contentType);
       res.end(photo.data.buffer, 'binary');
     });
