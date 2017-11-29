@@ -1179,3 +1179,34 @@
 2017-11-28T02:05:40.644-0500 I -        [conn402] end connection 74.82.47.2:35532 (2 connections now open)
 2017-11-28T14:23:41.755-0500 I NETWORK  [thread1] connection accepted from 103.78.132.3:34576 #403 (2 connections now open)
 2017-11-28T14:23:41.832-0500 I -        [conn403] end connection 103.78.132.3:34576 (2 connections now open)
+2017-11-28T22:12:16.131-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60700 #404 (2 connections now open)
+2017-11-28T22:12:16.185-0500 I NETWORK  [conn404] received client metadata from 127.0.0.1:60700 conn404: { driver: { name: "nodejs", version: "2.2.33" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "10.0.15063" }, platform: "Node.js v6.11.3, LE, mongodb-core: 2.1.17" }
+2017-11-28T22:14:14.770-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60774 #405 (3 connections now open)
+2017-11-28T22:14:14.773-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60775 #406 (4 connections now open)
+2017-11-28T22:14:14.811-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60776 #407 (5 connections now open)
+2017-11-28T22:14:14.916-0500 I COMMAND  [conn404] command penn-leases.addresses command: insert { insert: "addresses", documents: [ { streetNumber: 3817, street: "Spruce Street", city: "Philadelphia", state: "PA", zip: "19104", _id: ObjectId('5a1e2606390293568ded559f'), __v: 0 } ], ordered: false, writeConcern: { w: 1 } } ninserted:1 keysInserted:1 numYields:0 reslen:44 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { w: 1 } }, Collection: { acquireCount: { w: 1 } } } protocol:op_query 111ms
+2017-11-28T22:16:31.347-0500 I -        [conn407] end connection 127.0.0.1:60776 (5 connections now open)
+2017-11-28T22:16:31.347-0500 I -        [conn406] end connection 127.0.0.1:60775 (5 connections now open)
+2017-11-28T22:16:31.347-0500 I -        [conn404] end connection 127.0.0.1:60700 (4 connections now open)
+2017-11-28T22:16:31.348-0500 I -        [conn405] end connection 127.0.0.1:60774 (2 connections now open)
+2017-11-28T22:16:32.535-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60792 #408 (2 connections now open)
+2017-11-28T22:16:32.544-0500 I NETWORK  [conn408] received client metadata from 127.0.0.1:60792 conn408: { driver: { name: "nodejs", version: "2.2.33" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "10.0.15063" }, platform: "Node.js v6.11.3, LE, mongodb-core: 2.1.17" }
+2017-11-28T22:18:45.479-0500 I -        [conn408] end connection 127.0.0.1:60792 (2 connections now open)
+2017-11-28T22:18:46.652-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60802 #409 (2 connections now open)
+2017-11-28T22:18:46.660-0500 I NETWORK  [conn409] received client metadata from 127.0.0.1:60802 conn409: { driver: { name: "nodejs", version: "2.2.33" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "10.0.15063" }, platform: "Node.js v6.11.3, LE, mongodb-core: 2.1.17" }
+2017-11-28T22:19:06.286-0500 I -        [conn409] end connection 127.0.0.1:60802 (2 connections now open)
+2017-11-28T22:19:07.416-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60803 #410 (2 connections now open)
+2017-11-28T22:19:07.426-0500 I NETWORK  [conn410] received client metadata from 127.0.0.1:60803 conn410: { driver: { name: "nodejs", version: "2.2.33" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "10.0.15063" }, platform: "Node.js v6.11.3, LE, mongodb-core: 2.1.17" }
+2017-11-28T22:23:24.893-0500 I -        [conn410] end connection 127.0.0.1:60803 (2 connections now open)
+2017-11-28T22:23:25.935-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:60866 #411 (2 connections now open)
+2017-11-28T22:23:25.944-0500 I NETWORK  [conn411] received client metadata from 127.0.0.1:60866 conn411: { driver: { name: "nodejs", version: "2.2.33" }, os: { type: "Windows_NT", name: "win32", architecture: "x64", version: "10.0.15063" }, platform: "Node.js v6.11.3, LE, mongodb-core: 2.1.17" }
+2017-11-29T02:14:38.704-0500 I NETWORK  [thread1] connection accepted from 74.82.47.5:18206 #412 (3 connections now open)
+2017-11-29T02:14:38.853-0500 I -        [conn412] end connection 74.82.47.5:18206 (3 connections now open)
+2017-11-29T02:14:47.927-0500 I NETWORK  [thread1] connection accepted from 74.82.47.5:22186 #413 (3 connections now open)
+2017-11-29T02:14:48.085-0500 I -        [conn413] end connection 74.82.47.5:22186 (3 connections now open)
+2017-11-29T04:38:59.449-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:51374 #414 (3 connections now open)
+2017-11-29T04:38:59.501-0500 I -        [conn414] end connection 127.0.0.1:51374 (3 connections now open)
+2017-11-29T04:45:38.252-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:51403 #415 (3 connections now open)
+2017-11-29T04:45:38.304-0500 I -        [conn415] end connection 127.0.0.1:51403 (3 connections now open)
+2017-11-29T04:45:43.937-0500 I NETWORK  [thread1] connection accepted from 127.0.0.1:51404 #416 (3 connections now open)
+2017-11-29T04:45:43.944-0500 I -        [conn416] end connection 127.0.0.1:51404 (3 connections now open)

@@ -11,7 +11,6 @@ router.get('/:id', function (req, res, next) {
       delete listing.photos;
       delete listing.address;
       delete listing.__v;
-      address.state = 'MD';
       address.lineOne = address.streetNumber + ' ' +
       address.street;
       address.lineTwo = address.unit;
