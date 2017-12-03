@@ -12,6 +12,8 @@ var create = require('./routes/create');
 var view = require('./routes/view');
 var images = require('./routes/images');
 var search = require('./routes/search');
+var results = require('./routes/results');
+
 
 var handleError = require('./middlewares/handleError.js');
 
@@ -37,6 +39,7 @@ app.use('/create', create);
 app.use('/view', view);
 app.use('/images', images);
 app.use('/search', search);
+app.use('/results', results);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

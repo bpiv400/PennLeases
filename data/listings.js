@@ -42,5 +42,32 @@ module.exports = {
         callback(error, listing, address, photos);
       }
     });
-  }
+  },
+  getSearchResults: function(constraints, callback) {
+    console.log(constraints.limit);
+    console.log(constraints.page);
+    console.log(constraints.sort);
+    mongo.Listings.find({}).
+      limit(constraints.limit).
+      skip(constraints.limit * (constraints.page - 1)).
+      sort(constraints.sort).
+      populate('address').
+      exec(function (error, listings) {
+        if (error) {
+          callback(error, listings, null);
+        } else {
+          var addresses = Array();
+          listings = listings.map(function(listing) {
+            var out = listing.toObject();
+            delete out.address.__v;
+            delete out.address._id;
+            addresses.push(out.address);
+            delete out.address;
+            delete out.__v;
+            return out;
+          });
+          callback(error, listings, addresses);
+        }
+      });
+    }
 };
