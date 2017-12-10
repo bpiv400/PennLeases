@@ -14,6 +14,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/penn-leases', function (err) {
 var db = mongoose.connection;
 var possTerms = ['Spring 2018', 'Summer 2018', 'Fall 2018'];
 
+var userSchema = new mongoose.Schema({
+  name: {type: String, required : true},
+  email: {type: String, required : true},
+  provider: {type: String, required : true},
+  profile: {type: Object, required: true},
+  following: {type:[{type: mongoose.Schema.Types.ObjectId, ref: 'Listing'}],
+    required : true, default : []},
+  posted: {type:[{type: mongoose.Schema.Types.ObjectId, ref: 'Listing'}],
+    required : true, default : []},
+});
+
 var listingSchema = new mongoose.Schema({
   housingType: {type : String, required : true, enum: ['House', 'Apartment Building']},
   term: {type: [{type: String, enum: possTerms}], required : true,
@@ -36,9 +47,12 @@ var listingSchema = new mongoose.Schema({
   }*/
   },
   buildingName : {type: String},
+  name: {type: String, required: true, trim: true},
+  email: {type: String, required: true, trim: true},
   price: {type: Number, required: true, min: 0},
   furnished: {type: Boolean, required: true},
   size: {type: Number, min: 0},
+  date: {type: Date, default : Date.now},
   occupancy: {type: Number, validate: {
       validator : function (value) {
         return value % 1 === 0 && value > 0;
@@ -83,9 +97,10 @@ var addressSchema = new mongoose.Schema({
 var Listings = mongoose.model('Listing', listingSchema);
 var Address = mongoose.model('Address', addressSchema);
 var Photo = mongoose.model('Photo', photoSchema);
-
+var User = mongoose.model('User', userSchema);
 module.exports = {
   Listings: Listings,
+  User: User,
   Photo: Photo,
   Address: Address,
   mongoose: mongoose,

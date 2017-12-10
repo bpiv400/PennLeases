@@ -1,15 +1,6 @@
 $(function () {
 //  var buildingNameHtml = '<p id=\'building-name\'>Building Name<br>' +
 //      '<input type=\'text\' name=\'buildingName\'></p>';
-  if $('#housing-type-select').val() === 'Apartment Building') {
-    if ($('#building-name').length == 0) {
-      $('#beds-paragraph').before('<div id=\'building-name\' class=\'form-group\'>Building Name:</div>');
-      $('#building-name').append('<input type=\'text\' name=\'buildingName\' class=\'form-control\'>');
-    }
-  } else {
-    $('#building-name').remove();
-  }
-
   $('#housing-type-select').change(function() {
     if ($(this).val() === 'House')
       $('#building-name').remove();

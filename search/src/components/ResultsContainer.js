@@ -38,7 +38,28 @@ export default class ResultsContainer extends React.Component {
   componentDidMount() {
     this.props.store.subscribe(function () {
       console.log(this.props.store.getState());
-      this.setState(this.props.store.getState());
+      var fetchURL = this.getFetch(this.props.store.getState());
+      fetch(fetchURL)
+      .then(function(res) {
+          return (res.json());
+        })
+        .then(function (data) {
+          var storeState = this.props.store.getState();
+          this.setState({
+            lim: storeState.lim,
+            page: storeState.page,
+            sort: storeState.sort,
+            apartments: storeState.apartments,
+            houses: storeState.houses,
+            occupancy: storeState.occupancy,
+            maxPrice: storeState.maxPrice,
+            minPrice: storeState.minPrice,
+            ord: storeState.ord,
+            term: storeState.term,
+            furnished: storeState.furnished,
+            results : data
+          });
+        }.bind(this));
     }.bind(this));
   }
 
@@ -121,9 +142,28 @@ export default class ResultsContainer extends React.Component {
     return out;
   }
 
+  getFetch(storeState) {
+    var termString = '';
+    console.log(storeState.term);
+    console.log(storeState.fart);
+    for (var i = 0; i < storeState.term.length; i++) {
+      termString += '&term[]=' + storeState.term[i];
+    }
+    var furnString = '';
+    for (var j = 0; j < storeState.furnished.length; j++) {
+      furnString += '&furn[]=' + storeState.furnished[j];
+    }
+    var out = '/results?pg=' + storeState.page + '&lim=' + storeState.lim +
+      '&ord=' + storeState.ord + '&srt=' + storeState.sort + '&apt=' +
+      storeState.apartments.toString() + '&house=' +
+      storeState.houses.toString() + '&occ=' + storeState.occupancy +
+     '&min=' + storeState.minPrice + '&max=' + storeState.maxPrice +
+     termString + furnString;
+       return out;
+  }
+
   render() {
     //TODO: ADD LISTENERS FOR
-    console.log(this.state.term);
     var occupancyOptions = this.getOccupancyOptions();
     var sortOptions = this.getSortOptions();
     var orderOptions = this.getOrderOptions();
@@ -226,20 +266,10 @@ export default class ResultsContainer extends React.Component {
             </div>
             <div className={'results'}>
               <Results
-                page = {this.state.page}
-                lim = {this.state.lim}
-                sort = {this.state.sort}
-                apartments = {this.state.apartments}
-                houses = {this.state.houses}
-                occupancy = {this.state.occupancy}
-                maxPrice = {this.state.maxPrice}
-                minPrice = {this.state.minPrice}
-                ord = {this.state.ord}
-                term = {this.state.term}
-                furnished = {this.state.furnished}
-                defaultListings = {this.state.defaults.listings}
-                defaultAddresses = {this.state.defaults.addresses}
-            ></Results>
+                listings = {this.state.results.listings}
+                addresses = {this.state.results.addresses}
+              >
+            </Results>
             </div>
             <div className = 'row'>
               <div className = 'col-sm-6'>

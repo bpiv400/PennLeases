@@ -47,7 +47,9 @@ const mainReducer = (state, action) => {
         maxPrice: action.max
       });
     }
+    default : {
+      return state;
+    }
   }
-  return state;
 };
 export {mainReducer}

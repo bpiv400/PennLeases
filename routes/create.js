@@ -46,12 +46,18 @@ router.post('/', function(req, res, next) {
   var housingType = req.body.housingType;
   var buildingName = req.body.buildingName;
   var beds = req.body.beds;
+  var email = req.body.email.trim();
+  var name = req.body.name.trim();
   var baths = req.body.baths;
   var occupancy = req.body.occupancy;
   var size = req.body.size;
   var price = req.body.price;
   var furnished = false;
-  if (req.body.furnished === 1) {
+  console.log(email);
+  console.log(name);
+  console.log(req.body.furnished);
+  console.log(typeof req.body.furnished);
+  if (req.body.furnished === '1') {
     furnished = true;
   }
   var description = req.body.description;
@@ -66,6 +72,8 @@ router.post('/', function(req, res, next) {
     baths: baths,
     occupancy: occupancy,
     furnished: furnished,
+    email: email,
+    name: name,
     address: {
       streetNumber: streetNumber,
       street: street,
@@ -109,6 +117,7 @@ router.post('/', function(req, res, next) {
     if(err) {
       next(err);
     } else {
+      console.log(listing);
       var id = listing.id.valueOf();
       res.redirect('/create/success/' + id);
     }

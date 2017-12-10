@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const path = require('path')
 
 router.get('/', function(req, res, next) {
-  res.redirect('http://localhost:3000/');
+  res.render('search');
 });
 
 module.exports = router;

@@ -16,6 +16,16 @@
     <script src="/javascripts/create.js"></script>
     <h1>Submit a Sublease Listing</h1>
     <form method="post" class='formal-vertical' enctype="multipart/form-data">
+      <fieldset><legend>Contact Information</legend>
+        <div class='form-group'>Name
+          <input type = 'text' name = 'name' class = 'form-control'
+          required/>
+        </div>
+        <div class='form-group'>Email
+          <input type = 'text' name = 'email' class = 'form-control'
+          required/>
+        </div>
+      </fieldset>
       <fieldset id='availability-set' class='form-group'><legend>Availability</legend>
         <%
           for (var i = 0; i < possTerms.length; i++) {
