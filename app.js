@@ -23,21 +23,20 @@ var FACEBOOK_APP_ID = '1514772795286498';
 var FACEBOOK_APP_SECRET = 'cf0f074ea3e1a76939f5ca24792dcee9';
 
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3001/auth/facebook/callback",
-    profileFields: ['id', 'displayName', 'emails']
-  },
-  function(accessToken, refreshToken, profile, done) {
-    userDb.findOrCreate(profile, function(err, user) {
-      if (err) {
-        return done(err);
-      } else {
-        done(null, user);
-      }
-    });
-  })
-);
+  clientID: FACEBOOK_APP_ID,
+  clientSecret: FACEBOOK_APP_SECRET,
+  callbackURL: 'http://localhost:3001/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'emails']
+},
+function (accessToken, refreshToken, profile, done) {
+  userDb.findOrCreate(profile, function (err, user) {
+    if (err) {
+      return done(err);
+    } else {
+      done(null, user);
+    }
+  });
+}));
 
 var handleError = require('./middlewares/handleError.js');
 var loginCheck = require('./middlewares/loginCheck.js');
@@ -70,15 +69,18 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  })
+);
 
 app.use('/images', images);
 app.use('/search', search);
 app.use('/results', results);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

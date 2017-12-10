@@ -1,7 +1,7 @@
 $(function () {
 //  var buildingNameHtml = '<p id=\'building-name\'>Building Name<br>' +
 //      '<input type=\'text\' name=\'buildingName\'></p>';
-  $('#housing-type-select').change(function() {
+  $('#housing-type-select').change(function () {
     if ($(this).val() === 'House')
       $('#building-name').remove();
     else if ($(this).val() === 'Apartment Building') {
@@ -11,7 +11,7 @@ $(function () {
       }
     }
   });
-  $('#zip').change(function(e) {
+  $('#zip').change(function (e) {
     var zipCode = $(this).val().trim();
     var num = new Number(zipCode);
     var int = false;
@@ -27,7 +27,7 @@ $(function () {
       $('#zip-paragraph').addClass('has-success');
     }
   });
-  $('#submission').on('click', function(e) {
+  $('#submission').on('click', function (e) {
     var zipError = $('#zip-paragraph').hasClass('has-error');
     if (zipError) {
       e.preventDefault();

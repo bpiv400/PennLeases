@@ -11,7 +11,7 @@ var loginCheck = function (req, res, next) {
       req.path !== '/auth/facebook/' &&
       req.path !== 'auth/facebook/callback' &&
       req.path !== 'auth/facebook/callback/') {
-        res.redirect('/login');
+      res.redirect('/login');
     }
   }
   next();

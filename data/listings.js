@@ -3,7 +3,7 @@ var mongo = require('./mongo');
 module.exports = {
   addListing: function (listingData, callback) {
     var address = new mongo.Address(listingData.address);
-    address.save(function(err, newAddress) {
+    address.save(function (err, newAddress) {
       if (err) {
         callback(err, null);
       }
@@ -27,23 +27,23 @@ module.exports = {
       callback(err, newListing);
     });
   },
-  getListingById: function(idString, callback) {
+  getListingById: function (idString, callback) {
     mongo.Listings.findById(idString).populate('address')
-    .exec(function (error, listing) {
-      if (error) {
-        callback(error, listing, null);
-      } else {
-        photos = listing.photos;
-        //console.log(photos);
-        //console.log(typeof photos[0]);
-        address = listing.address;
-        listing = listing.toObject();
-        address = address.toObject();
-        callback(error, listing, address, photos);
-      }
-    });
+      .exec(function (error, listing) {
+        if (error) {
+          callback(error, listing, null);
+        } else {
+          var photos = listing.photos;
+          //console.log(photos);
+          //console.log(typeof photos[0]);
+          var address = listing.address;
+          listing = listing.toObject();
+          address = address.toObject();
+          callback(error, listing, address, photos);
+        }
+      });
   },
-  getSearchResults: function(constraints, callback) {
+  getSearchResults: function (constraints, callback) {
     console.log(constraints.limit);
     if (constraints.occupancy === 0 || !constraints.occupancy) {
       constraints.occupancy = {
@@ -64,7 +64,7 @@ module.exports = {
     } else {
       constraints.furnished = {
         $in : constraints.furnished
-      }
+      };
     }
     if (!constraints.term) {
       constraints.term = {
@@ -81,7 +81,7 @@ module.exports = {
     if (!constraints.types || constraints.types.length === 0) {
       constraints.types = ['Apartment Building', 'House'];
     }
-   mongo.Listings.find(
+    mongo.Listings.find(
       { $and: [
         {price : { $gte: constraints.minPrice, $lte: constraints.maxPrice } },
         {housingType : { $in: constraints.types} },
@@ -99,7 +99,7 @@ module.exports = {
           callback(error, listings, null);
         } else {
           var addresses = Array();
-          listings = listings.map(function(listing) {
+          listings = listings.map(function (listing) {
             var out = listing.toObject();
             delete out.address.__v;
             delete out.address._id;
@@ -111,5 +111,5 @@ module.exports = {
           callback(error, listings, addresses);
         }
       });
-    }
+  }
 };

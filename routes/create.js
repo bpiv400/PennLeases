@@ -33,11 +33,11 @@ var gfs = Grid(conn.db);
 
 router.use('/', fileUpload());
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('create', {possTerms : termOptions});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
   var term = req.body.term;
   var streetNumber = req.body.streetNumber;
   var unit = req.body.unit;
@@ -97,8 +97,8 @@ router.post('/', function(req, res, next) {
   if (files) {
     var photos = new Array();
     if (Array.isArray(files.photo)) {
-      for(var i = 0; i < files.photo.length; i++) {
-        var curr = files.photo[i]
+      for (var i = 0; i < files.photo.length; i++) {
+        var curr = files.photo[i];
         photos.push({
           data: curr.data,
           contentType: curr.mimetype
@@ -114,7 +114,7 @@ router.post('/', function(req, res, next) {
   }
 
   listingDb.addListing(listingData, function (err, listing) {
-    if(err) {
+    if (err) {
       next(err);
     } else {
       console.log(listing);
@@ -124,7 +124,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.get('/success/:id', function(req, res, next) {
+router.get('/success/:id', function (req, res, next) {
   res.render('success', {id : req.params.id});
 });
 

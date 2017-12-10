@@ -17,6 +17,8 @@
     "fs": "0.0.1-security",
     "gridfs-stream": "^1.1.1",
     "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-zip": "^4.0.0",
     "jade": "~1.11.0",
     "lightbox2": "^2.10.0",
     "lightgallery": "^1.6.5",

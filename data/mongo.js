@@ -54,23 +54,23 @@ var listingSchema = new mongoose.Schema({
   size: {type: Number, min: 0},
   date: {type: Date, default : Date.now},
   occupancy: {type: Number, validate: {
-      validator : function (value) {
-        return value % 1 === 0 && value > 0;
-      },
-      message: 'Occupancy must be positive integer'
+    validator : function (value) {
+      return value % 1 === 0 && value > 0;
+    },
+    message: 'Occupancy must be positive integer'
   }, required: true},
   beds: {type: Number, validate: {
-      validator : function (value) {
-        return value % 1 === 0 && value > 0;
-      },
-      message: 'Beds must be positive integer'
+    validator : function (value) {
+      return value % 1 === 0 && value > 0;
+    },
+    message: 'Beds must be positive integer'
   }, required: true},
   baths: {type: Number, validate: {
-        validator: function (value) {
-            return  ((value % 1 === 0 || value % 1 === .5) && value >= 0);
-        },
-        message: 'Value must be multiple of 1/2'
-      }, required: true},
+    validator: function (value) {
+      return ((value % 1 === 0 || value % 1 === .5) && value >= 0);
+    },
+    message: 'Value must be multiple of 1/2'
+  }, required: true},
   description: {type: String, maxlength: 400},
   address: {type: mongoose.Schema.Types.ObjectId, ref : 'Address', required : true},
   photos: [{type: mongoose.Schema.Types.ObjectId, ref : 'Photo'}]
@@ -85,7 +85,7 @@ var addressSchema = new mongoose.Schema({
     validator: function (value) {
       return (value % 1) === 0;
     },
-     message : 'street number must be valid integer'
+    message : 'street number must be valid integer'
   }},
   street: {type: String, required: true, trim: true},
   unit: {type: String, trim: true},

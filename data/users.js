@@ -1,8 +1,8 @@
 var mongo = require('./mongo');
 
 module.exports = {
-  findOrCreate(userData, callback) {
-    mongo.User.findOne({'facebook.id' : userData.id}, function(err, user) {
+  findOrCreate : function (userData, callback) {
+    mongo.User.findOne({'facebook.id' : userData.id}, function (err, user) {
       if (err) {
         return callback(err);
       } else if (!user) {
@@ -15,7 +15,7 @@ module.exports = {
           following: [],
           posted: []
         });
-        user.save(function(err) {
+        user.save(function (err) {
           if (err) {
             console.log(err);
           } else {
@@ -28,4 +28,4 @@ module.exports = {
       }
     });
   }
-}
+};
