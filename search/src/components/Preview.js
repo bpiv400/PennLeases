@@ -1,4 +1,5 @@
 import  React  from 'react';
+import noImg from '../img/no_img.png';
 
 export default class Preview extends React.Component {
   constructor() {
@@ -14,14 +15,18 @@ export default class Preview extends React.Component {
     let addressTitle = this.props.address.streetNumber + ' ' +
       this.props.address.street;
     if (this.props.address.unit) {
-      addressTitle = addressTitle + this.props.address.unit;
+      addressTitle = addressTitle + ' ' + this.props.address.unit;
     }
     //TODO: Determine whether this needs to be changed when
     // going to production -- understand how react is communicating
     // with the server better
     let imgSource = null;
     if (this.props.photos) {
-       imgSource = "/images/?id=" + this.props.photos[0];
+      if (this.props.photos.length >= 1) {
+         imgSource = "/images/?id=" + this.props.photos[0];
+       } else {
+         imgSource = noImg;
+       }
     }
     let viewLink = "/view/" + this.props.id;
     let availability ="";

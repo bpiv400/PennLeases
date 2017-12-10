@@ -45,9 +45,51 @@ module.exports = {
   },
   getSearchResults: function(constraints, callback) {
     console.log(constraints.limit);
-    console.log(constraints.page);
-    console.log(constraints.sort);
-    mongo.Listings.find({}).
+    if (constraints.occupancy === 0 || !constraints.occupancy) {
+      constraints.occupancy = {
+        $gte : 0
+      };
+    } else {
+      constraints.occupancy = {
+        $eq : constraints.occupancy
+      };
+    }
+    if (!constraints.minPrice) {
+      constraints.minPrice = 0;
+    }
+    if (!constraints.furnished) {
+      constraints.furnished = {
+        $in : [true, false]
+      };
+    } else {
+      constraints.furnished = {
+        $in : constraints.furnished
+      }
+    }
+    if (!constraints.term) {
+      constraints.term = {
+        $in : mongo.possTerms
+      };
+    } else {
+      constraints.term = {
+        $all : constraints.term
+      };
+    }
+    if (!constraints.maxPrice) {
+      constraints.maxPrice = 10000;
+    }
+    if (!constraints.types || constraints.types.length === 0) {
+      constraints.types = ['Apartment Building', 'House'];
+    }
+   mongo.Listings.find(
+      { $and: [
+        {price : { $gte: constraints.minPrice, $lte: constraints.maxPrice } },
+        {housingType : { $in: constraints.types} },
+        {occupancy : constraints.occupancy },
+        {term: constraints.term},
+        {furnished: constraints.furnished}
+      ]
+      }).
       limit(constraints.limit).
       skip(constraints.limit * (constraints.page - 1)).
       sort(constraints.sort).

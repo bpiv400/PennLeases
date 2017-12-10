@@ -50,7 +50,10 @@ router.post('/', function(req, res, next) {
   var occupancy = req.body.occupancy;
   var size = req.body.size;
   var price = req.body.price;
-  var furnished = new Boolean(req.body.furnished);
+  var furnished = false;
+  if (req.body.furnished === 1) {
+    furnished = true;
+  }
   var description = req.body.description;
   var files = req.files;
   var state = req.body.state;
@@ -85,11 +88,18 @@ router.post('/', function(req, res, next) {
   }
   if (files) {
     var photos = new Array();
-    for(var i = 0; i < files.photo.length; i++) {
-      var curr = files.photo[i]
+    if (Array.isArray(files.photo)) {
+      for(var i = 0; i < files.photo.length; i++) {
+        var curr = files.photo[i]
+        photos.push({
+          data: curr.data,
+          contentType: curr.mimetype
+        });
+      }
+    } else {
       photos.push({
-        data: curr.data,
-        contentType: curr.mimetype
+        data: files.photo.data,
+        contentType: files.photo.mimetype
       });
     }
     listingData.photos = photos;
