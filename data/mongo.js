@@ -1,6 +1,18 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://127.0.0.1:27017/penn-leases', function (err) {
+var options = {
+  useMongoClient: true,
+};
+
+var uri = 'mongodb://eplu:uvTna5WdB4JKStfn@pennleases01-'  +
+'shard-00-00-46rxg.mongodb.net:27017,' +
+'pennleases01-shard-00-01-46rxg.' +
+'mongodb.net:27017,pennleases01-shard-00' +
+'-02-46rxg.mongodb.net:27017/penn-leases?ssl=true&' +
+'replicaSet=PennLeases01-shard-0&authSource=admin';
+
+mongoose.connect(uri, options,
+ function (err) {
   if (err && err.message.includes('ECONNREFUSED')) {
     console.log('Error connecting to mongodb database: %s.\nIs "mongod" running?', err.message);
     process.exit(0);
