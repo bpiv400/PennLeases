@@ -125,8 +125,8 @@ export default class ResultsContainer extends React.Component {
     var ascendingLabel = 'Low to High';
     var descendingLabel = 'High to Low';
     if (this.state.sort === 'date') {
-      ascendingLabel = 'Most Recent First';
-      descendingLabel = 'Oldest First';
+      ascendingLabel = 'Oldest First';
+      descendingLabel = 'Most Recent First';
     }
     out.push({value : 1 , label : ascendingLabel});
     out.push({value : -1, label : descendingLabel});
@@ -168,6 +168,24 @@ export default class ResultsContainer extends React.Component {
     var sortOptions = this.getSortOptions();
     var orderOptions = this.getOrderOptions();
     var limitOptions = this.getLimitOptions();
+    var prevButton = null;
+    if (this.state.page !== 1) {
+      prevButton = (
+        <div className = 'col-xs-2'>
+          <button className = 'btn'
+            onClick = {this.onPrevPage}>
+            {'Prev'}
+          </button>
+        </div>
+      );
+    }
+    var nextButton = (
+      <div className = 'col-xs-2'>
+        <button className = 'btn'
+          onClick = {this.onNextPage}>
+          {'Next'}
+        </button>
+      </div>);
     var termArray = initialState.possTerms.map( function(currTerm) {
       return (
         <label>
@@ -281,21 +299,11 @@ export default class ResultsContainer extends React.Component {
                     onChange = {this.onLimit}
                   /> </label>
               </div>
-              <div className = 'col-xs-2'>
-                <button className = 'btn'
-                  onClick = {this.onPrevPage}>
-                  {'Prev'}
-                </button>
-              </div>
+              {prevButton}
               <div className = 'col-xs-2'>
                 <p> {'Page: ' + this.state.page} </p>
               </div>
-              <div className = 'col-xs-2'>
-                <button className = 'btn'
-                  onClick = {this.onNextPage}>
-                  {'Next'}
-                </button>
-              </div>
+              {nextButton}
             </div>
           </div>
         </div>

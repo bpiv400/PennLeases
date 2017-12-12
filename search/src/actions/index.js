@@ -21,7 +21,7 @@ const type = (value) => {
 const order = (choice) => {
   var value;
   if (!choice) {
-    value = 1;
+    value = -1;
   } else {
     value = choice.value;
   }
