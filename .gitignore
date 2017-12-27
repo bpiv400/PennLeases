@@ -1,0 +1,5 @@
+**/node_modules
+*.log
+**/penn-leases-mongo
+search/build/
+password.txt
