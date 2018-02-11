@@ -12,16 +12,16 @@ var uri = 'mongodb://eplu:uvTna5WdB4JKStfn@pennleases01-'  +
 'replicaSet=PennLeases01-shard-0&authSource=admin';
 
 mongoose.connect(uri, options,
- function (err) {
-  if (err && err.message.includes('ECONNREFUSED')) {
-    console.log('Error connecting to mongodb database: %s.\nIs "mongod" running?', err.message);
-    process.exit(0);
-  } else if (err) {
-    throw err;
-  } else {
-    console.log('DB successfully connected');
-  }
-});
+  function (err) {
+    if (err && err.message.includes('ECONNREFUSED')) {
+      console.log('Error connecting to mongodb database: %s.\nIs "mongod" running?', err.message);
+      process.exit(0);
+    } else if (err) {
+      throw err;
+    } else {
+      console.log('DB successfully connected');
+    }
+  });
 
 var db = mongoose.connection;
 var possTerms = ['Spring 2018', 'Summer 2018', 'Fall 2018'];
